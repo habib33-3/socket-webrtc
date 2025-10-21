@@ -3,7 +3,7 @@ export enum SocketEvent {
   LEAVE_ROOM = "leave-room",
   OFFER = "offer",
   ANSWER = "answer",
-
+  JOIN_PERSONAL_CHAT = "joinPersonalChat",
   END_CALL = "end-call",
   USER_CONNECTED = "user-connected",
   USER_DISCONNECTED = "user-disconnected",
