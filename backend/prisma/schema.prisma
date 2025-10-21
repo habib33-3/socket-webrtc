@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  createdAt DateTime @default(now())
+
+  MessageSent     Message[] @relation("SentMessages")
+  MessageReceived Message[] @relation("ReceivedMessages")
+
+  ConversationsAsUser1 Conversation[] @relation("User1Conversations")
+  ConversationsAsUser2 Conversation[] @relation("User2Conversations")
+}
+
+model Message {
+  id         String @id @default(uuid())
+  content    String
+  senderId   String
+  sender     User   @relation("SentMessages", fields: [senderId], references: [id])
+  receiverId String
+  receiver   User   @relation("ReceivedMessages", fields: [receiverId], references: [id])
+
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String
+  createdAt      DateTime     @default(now())
+}
+
+model Conversation {
+  id String @id @default(uuid())
+
+  user1Id String
+  user1   User   @relation("User1Conversations", fields: [user1Id], references: [id])
+
+  user2Id String
+  user2   User   @relation("User2Conversations", fields: [user2Id], references: [id])
+
+  messages Message[]
+
+  createdAt DateTime @default(now())
+}

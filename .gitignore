@@ -1,0 +1,38 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+*.log
+logs/
+
+# Runtime files
+pids/
+*.pid
+*.seed
+
+# Dependency directories
+jspm_packages/
+
+# Environment variables
+.env
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.swp
+
+# npm package lock file (if you prefer not to commit it)
+package-lock.json
+yarn.lock
