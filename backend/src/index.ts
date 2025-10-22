@@ -3,13 +3,12 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import { SocketEvent } from "./events.js";
+import { initSocket } from "./socket.js";
 
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  connectionStateRecovery: {},
-});
+initSocket(server);
 
 app.use(express.json());
 app.use(
@@ -25,13 +24,7 @@ app.use(
 
 const port = process.env.PORT || 5000;
 
-io.on("connection", (socket) => {
-  socket.on(SocketEvent.JOIN_PERSONAL_CHAT, (user1Id, user2Id) => {
-    const roomId = `personal-${user1Id}-${user2Id}`;
-    socket.join(roomId);
-    console.log(`${user1Id} and ${user2Id} are now in room: ${roomId}`);
-  });
-});
+
 
 server.listen(port, () => {
   console.log(`server running on ${port}`);
