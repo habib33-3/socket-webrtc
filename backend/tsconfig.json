@@ -1,34 +1,21 @@
 {
   "compilerOptions": {
-    // File Layout
     "rootDir": "./src",
     "outDir": "./dist",
-
-    // Module System: ESM for Node
     "module": "NodeNext",
     "target": "ESNext",
     "moduleResolution": "NodeNext",
-
-    // Output
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-
-    // Type Definitions
-    "types": ["node"],
-
-    // Type Checking
+    
+    // ⬅️ ADD THIS LINE
+    "noEmit": true, 
+    
+    // Now you can safely use 'allowImportingTsExtensions'
+    "allowImportingTsExtensions": true, 
+    
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-
-    // ESM-friendly settings
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-
-    // Misc
-    "skipLibCheck": true,
-    "moduleDetection": "force"
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["dist", "node_modules"]

@@ -1,6 +1,5 @@
 import { Server as IOServer } from "socket.io";
 import { createServer, Server as HTTPServer } from "http";
-import prisma from "./prisma.js";
 
 let io: IOServer | null = null;
 
@@ -10,9 +9,7 @@ export function initSocket(server: HTTPServer) {
     cors: { origin: "*" },
   });
 
-  io.on("connection", (socket) => {
-    
-  });
+  io.on("connection", (socket) => {});
 
   return io;
 }

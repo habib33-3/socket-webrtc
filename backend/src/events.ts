@@ -1,11 +1,7 @@
-export enum SocketEvent {
-  JOIN_ROOM = "join-room",
-  LEAVE_ROOM = "leave-room",
-  OFFER = "offer",
-  ANSWER = "answer",
-  JOIN_PERSONAL_CHAT = "joinPersonalChat",
-  END_CALL = "end-call",
-  USER_CONNECTED = "user-connected",
-  USER_DISCONNECTED = "user-disconnected",
-  MESSAGE = "message",
-}
+export const SocketEvent = {
+  SEND_MESSAGE: "send_message",
+  RECEIVE_MESSAGE: "receive_message",
+  JOIN_PERSONAL_CHAT: "join",
+  GET_ALL_MESSAGES: "get_all_messages",
+  ONLINE_USERS: "online_users",
+};
