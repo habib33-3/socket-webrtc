@@ -1,11 +1,12 @@
 import prisma from "../../prisma";
+import { getConversationId } from "../../socket/features/personal-chat";
 
 export const sendMessage = async (
   senderId: string,
   receiverId: string,
   content: string
 ) => {
-  // Find existing conversation between the two users
+
   let conversation = await prisma.conversation.findFirst({
     where: {
       OR: [
@@ -15,14 +16,16 @@ export const sendMessage = async (
     },
   });
 
+ const conversationId=getConversationId(senderId,receiverId)
+
   // If conversation doesn't exist, create it
   if (!conversation) {
     conversation = await prisma.conversation.create({
-      data: { user1Id: senderId, user2Id: receiverId },
+      data: { user1Id: senderId, user2Id: receiverId ,conversationId},
     });
   }
 
-  // Create message
+
   const message = await prisma.message.create({
     data: {
       senderId,
@@ -43,7 +46,7 @@ export const sendMessage = async (
 export const getMessages = async (conversationId: string) => {
   return prisma.message.findMany({
     where: { conversationId },
-    orderBy: { createdAt: "asc" }, // ensures chronological order
+    orderBy: { createdAt: "asc" }, 
     include: {
       sender: true,
       receiver: true,

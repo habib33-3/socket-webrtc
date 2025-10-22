@@ -3,7 +3,7 @@ import { getIO } from "./socket.ts";
 
 
 
-const features = [privateChatFeature, ]; // add more features
+const features = [privateChatFeature, ]; 
 
 export const registerSocketHandlers = () => {
   const io = getIO();

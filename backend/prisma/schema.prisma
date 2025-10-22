@@ -21,7 +21,7 @@ enum MessageStatus {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id String @id @default(uuid())
 
   email     String   @unique
   createdAt DateTime @default(now())
@@ -41,13 +41,15 @@ model Message {
   receiverId     String
   receiver       User          @relation("ReceivedMessages", fields: [receiverId], references: [id])
   status         MessageStatus @default(DELIVERED)
-  conversation   Conversation  @relation(fields: [conversationId], references: [id])
+  conversation   Conversation  @relation(fields: [conversationId], references: [conversationId])
   conversationId String
   createdAt      DateTime      @default(now())
 }
 
 model Conversation {
   id String @id @default(uuid())
+
+  conversationId String @unique
 
   user1Id String
   user1   User   @relation("User1Conversations", fields: [user1Id], references: [id])
